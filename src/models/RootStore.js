@@ -1,40 +1,44 @@
 import { types } from 'mobx-state-tree';
 import MoviesApi from '../api/MoviesApi';
-
-const Genres = types.model("Genres", {
-  id: types.number,
-  name: types.string
-});
-
-// Movie model
-const Movie = types.model("Movie", {
-  id: types.number,
-  title: types.string,
-  posterPath: types.maybeNull(types.string),
-  popularity: types.number,
-  voteAverage: types.number
-})
-.views(self => ({
-  get posterImage() {
-    return `${MoviesApi.imageUrl}${self.posterPath}`;
-  }
-}));
+import { Movie } from './Movie';
+import { Genre } from './Genre';
 
 // Main store model
-const MovieStore = types.model("Movies", {
+export const RootStore = types.model("Movies", {
   totalPages: types.maybe(types.number),
   currentPage: types.maybe(types.number),
   movies: types.array(Movie),
-  genres: types.array(Genres)
+  genres: types.array(Genre),
+  selectedGenres: types.array(types.number),
+  selectedRating: types.optional(types.number, 3)
 })
 
 // Computed values
 .views(self => ({
+
   get moviesByPopularity() {
     return self.movies.sort((a, b) => {
       return b.popularity - a.popularity;
     });
+  },
+
+  get moviesByGenre() {
+    if (self.selectedGenres.length > 0) {
+      return self.moviesByPopularity.filter((movie) => {
+        return movie.genreIds.some((id) => {
+          return self.selectedGenres.includes(id);
+        });
+      }) 
+    }
+    return self.moviesByPopularity;
+  },
+
+  get moviesFilteredByrating() {
+    return self.moviesByGenre.filter((movie) => {
+      return movie.voteAverage >= self.selectedRating;
+    });
   }
+
 }))
 // Actions are for interacting with store
 .actions(self => {
@@ -46,7 +50,6 @@ const MovieStore = types.model("Movies", {
   return {
 
     async loadMovies(page = 1) {
-      self.movies = [];
       const data = await api.getPlayingMovies(page);
       self.setTotalPages(data.total_pages);
       self.setMovies(data.results);
@@ -81,20 +84,35 @@ const MovieStore = types.model("Movies", {
           title: movie.title,
           posterPath: movie.poster_path,
           popularity: movie.popularity,
-          voteAverage: movie.vote_average
+          voteAverage: movie.vote_average,
+          genreIds: movie.genre_ids
         }));
       });
     },
 
+    setRating(val) {
+      self.selectedRating = val;
+    },
+
     setGenres(genres) {
       genres.map((genre) => {
-        self.genres.push(Genres.create({
+        self.genres.push(Genre.create({
           id: genre.id,
           name: genre.name
         }));
       });
+    },
+
+    selectGenre(id) {
+      if (self.selectedGenres.includes(id)) {
+        const newSelectedGenres = self.selectedGenres.filter((genreId) => {
+          return genreId !== id;
+        });
+        self.selectedGenres = [...newSelectedGenres];
+      } else {
+        self.selectedGenres.push(id);
+      }
     }
+
   }
 });
-
-export default MovieStore;

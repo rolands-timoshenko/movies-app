@@ -1,50 +1,73 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
+import { RatingSlider } from './components/ratingSlider/RatingSlider';
+import { GenreSelector } from './components/genreSelector/GenreSelector';
+import { MovieListing } from './components/movieListing/MovieListing';
+import { Button, Container, Row, Col } from 'reactstrap';
 
-class App extends Component {
+export class App extends Component {
+
+  rootStore;
+
+  constructor(props) {
+    super(props);
+    this.rootStore = this.props.rootStore;
+  }
 
   componentDidMount() {
-    this.props.store.loadMovies();
-    this.props.store.loadGenres();
+    // Lets load movies and genres 
+    this.rootStore.loadMovies();
+    this.rootStore.loadGenres();
   }
 
-  pages = () => {
-    return Array.from(Array(this.props.store.totalPages).keys())
+  // Show Load More button if there are more pages
+  showLoadMore = () => {
+    return (this.rootStore.totalPages > this.rootStore.currentPage)
+      ? <Button color="primary" onClick={this.rootStore.loadNext}>Load More</Button> : null;
   }
 
-  showNext = () => {
-    return (this.props.store.totalPages > this.props.store.currentPage) ? <button onClick={this.props.store.loadNext}>Next</button> : null;
+  // On cmp render function will be called and id will be saved in closure
+  handleSelectGenre = (id) => {
+    // Returning onChange handler. Using preserve id
+    return () => {
+      this.rootStore.selectGenre(id);
+    }
   }
 
-  showPrev = () => {
-    return (this.props.store.currentPage !== 1) ? <button onClick={this.props.store.loadPrev}>Prev</button> : null;
+  // On slider change lets update store
+  handleOnSliderChange = (val) => {
+    this.rootStore.setRating(val);
   }
 
   render() {
+
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to Movie listing app</h1>
-          <p>Total/Current: {this.props.store.totalPages} | {this.props.store.currentPage}</p>
         </header>
-        <ul>
-          {this.props.store.moviesByPopularity.map((movie) =>
-            (
-              <li key={movie.id}>
-                <img style={{width: 100}} src={movie.posterImage} />
-                {movie.title} {movie.popularity}
-              </li>
-            )
-          )}
-        </ul>
-        {this.showPrev()}
-        {this.showNext()}
+        <Container>
+          <Row>
+            <RatingSlider onChange={this.handleOnSliderChange} value={this.rootStore.selectedRating} />
+          </Row>
+          <Row>
+            <GenreSelector onChange={this.handleSelectGenre} genres={this.rootStore.genres} />
+          </Row>
+          <Row>
+            <MovieListing movies={this.rootStore.moviesFilteredByrating} />
+          </Row>
+          <Row>
+            <Col>
+              {this.showLoadMore()}
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
 }
 
-export default observer(App);
+export default inject('rootStore')(observer(App));
