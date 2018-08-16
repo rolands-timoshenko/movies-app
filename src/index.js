@@ -14,5 +14,5 @@ ReactDOM.render(
       <App />
     </Provider>
   , document.getElementById('root'));
-// TODO: enable when requires 
+// TODO: enable when needed 
 // registerServiceWorker(); 

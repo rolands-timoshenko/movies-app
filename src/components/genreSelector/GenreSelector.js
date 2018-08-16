@@ -14,8 +14,8 @@ const GenreSelector = observer((props) => {
 });
 
 GenreSelector.propTypes = {
-  genres: PropTypes.array,
-  onChange: PropTypes.func
+  genres: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export { GenreSelector };

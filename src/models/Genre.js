@@ -7,6 +7,7 @@ export const Genre = types.model("Genre", {
 })
 
 .views(self => ({
+  // Check if current genre model is active.
   get isActive() {
     const genres = getParentOfType(self, RootStore).selectedGenres;
     return genres.includes(self.id);

@@ -16,23 +16,26 @@ export const RootStore = types.model("Movies", {
 // Computed values
 .views(self => ({
 
+  // Movies will be sorted by popularity. Lets use slice, so we are not modifying original one.
   get moviesByPopularity() {
-    return self.movies.sort((a, b) => {
+    return self.movies.slice().sort((a, b) => {
       return b.popularity - a.popularity;
     });
   },
 
+  // Movies will be filtered by genre if such selected
   get moviesByGenre() {
     if (self.selectedGenres.length > 0) {
       return self.moviesByPopularity.filter((movie) => {
-        return movie.genreIds.some((id) => {
-          return self.selectedGenres.includes(id);
+        return self.selectedGenres.every((id) => {
+          return movie.genreIds.includes(id);
         });
       }) 
     }
     return self.moviesByPopularity;
   },
 
+  // Movies will be sorted by selected rating and higher
   get moviesFilteredByrating() {
     return self.moviesByGenre.filter((movie) => {
       return movie.voteAverage >= self.selectedRating;
@@ -49,6 +52,7 @@ export const RootStore = types.model("Movies", {
   // Return public methods
   return {
 
+    // This one will load movies from api and will spread properties to store
     async loadMovies(page = 1) {
       const data = await api.getPlayingMovies(page);
       self.setTotalPages(data.total_pages);
@@ -56,6 +60,7 @@ export const RootStore = types.model("Movies", {
       self.setCurrentPage(data.page);
     },
 
+    // Will load genres from api and spread them into store
     async loadGenres() {
       const genres = await api.getMovieGenres();
       self.setGenres(genres);
@@ -63,10 +68,6 @@ export const RootStore = types.model("Movies", {
 
     loadNext() {
       self.loadMovies(self.currentPage + 1);
-    },
-
-    loadPrev() {
-      self.loadMovies(self.currentPage - 1);
     },
 
     setTotalPages(pages) {
@@ -77,9 +78,10 @@ export const RootStore = types.model("Movies", {
       self.currentPage = page;
     },
 
+    // movies will be pushed into store
     setMovies(movies) {
       movies.map((movie) => {
-        self.movies.push(Movie.create({
+        return self.movies.push(Movie.create({
           id: movie.id,
           title: movie.title,
           posterPath: movie.poster_path,
@@ -96,13 +98,14 @@ export const RootStore = types.model("Movies", {
 
     setGenres(genres) {
       genres.map((genre) => {
-        self.genres.push(Genre.create({
+        return self.genres.push(Genre.create({
           id: genre.id,
           name: genre.name
         }));
       });
     },
 
+    // Will check if genre already exists in selectedGenres[] if so, item will be removed
     selectGenre(id) {
       if (self.selectedGenres.includes(id)) {
         const newSelectedGenres = self.selectedGenres.filter((genreId) => {

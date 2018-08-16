@@ -13,6 +13,7 @@ export class App extends Component {
 
   constructor(props) {
     super(props);
+    // Set shorter access to root store
     this.rootStore = this.props.rootStore;
   }
 
@@ -22,7 +23,7 @@ export class App extends Component {
     this.rootStore.loadGenres();
   }
 
-  // Show Load More button if there are more pages
+  // Show Load More button if there are more pages with movies.
   showLoadMore = () => {
     return (this.rootStore.totalPages > this.rootStore.currentPage)
       ? <Button color="primary" onClick={this.rootStore.loadNext}>Load More</Button> : null;
@@ -69,5 +70,6 @@ export class App extends Component {
     );
   }
 }
-
+// Inject allow us to access store through props. Also child cmp can access rootStore through inject. 
+// No need for making props chainprops chain. Plus lets decorate App cmp with mobx observer
 export default inject('rootStore')(observer(App));

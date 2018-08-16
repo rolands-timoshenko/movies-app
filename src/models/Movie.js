@@ -13,6 +13,7 @@ export const Movie = types.model("Movie", {
 // Computed values
 .views(self => ({
 
+  // Get genres as Genre[]
   get genres() {
     const genres = getParentOfType(self, RootStore).genres;
     return genres.filter((genre) => {
@@ -20,13 +21,14 @@ export const Movie = types.model("Movie", {
     });
   },
 
+  // This one will give us string[]
   get genreNames() {
     return self.genres.map((genre) => {
       return genre.name
     })
   },
 
-  // Lets get full image path just directly form Movie model
+  // Lets get full image path. genre model will have posterImage property. 
   get posterImage() {
     return `${MoviesApi.imageUrl}${self.posterPath}`;
   }

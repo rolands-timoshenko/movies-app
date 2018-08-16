@@ -47,6 +47,6 @@ export const RatingSlider = observer((props) => {
 });
 
 RatingSlider.propTypes = {
-  value: PropTypes.number,
-  onChange: PropTypes.func
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired
 };
