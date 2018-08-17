@@ -37,7 +37,7 @@ export const RootStore = types.model("Movies", {
 
   // Movies will be sorted by selected rating and higher
   get moviesFilteredByrating() {
-    return self.moviesByGenre.filter((movie) => {
+    return self.moviesByGenre.sort((a, b) => b.voteAverage - a.voteAverage).filter((movie) => {
       return movie.voteAverage >= self.selectedRating;
     });
   }
@@ -93,7 +93,9 @@ export const RootStore = types.model("Movies", {
     },
 
     setRating(val) {
-      self.selectedRating = val;
+      if (self.selectedRating !== val) {
+        self.selectedRating = val;
+      }
     },
 
     setGenres(genres) {

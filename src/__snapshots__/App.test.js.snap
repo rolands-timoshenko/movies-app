@@ -1,0 +1,519 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component tests  should render correctly App cmp 1`] = `
+<div
+  className="App"
+>
+  <header
+    className="App-header"
+  >
+    <img
+      alt="logo"
+      className="App-logo"
+      src="logo.svg"
+    />
+    <h1
+      className="App-title"
+    >
+      Welcome to Movie listing app
+    </h1>
+  </header>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col"
+        style={
+          Object {
+            "margin": 20,
+            "padding": 10,
+            "textAlign": "left",
+          }
+        }
+      >
+        <h4>
+          Select movie rating from 0 - 10
+        </h4>
+        <div
+          className="rc-slider rc-slider-with-marks"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          onTouchStart={[Function]}
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            className="rc-slider-rail"
+            style={Object {}}
+          />
+          <div
+            className="rc-slider-track"
+            style={
+              Object {
+                "left": "0%",
+                "width": "30%",
+              }
+            }
+          />
+          <div
+            className="rc-slider-step"
+          >
+            <span
+              className="rc-slider-dot rc-slider-dot-active"
+              style={
+                Object {
+                  "left": "0%",
+                }
+              }
+            />
+            <span
+              className="rc-slider-dot rc-slider-dot-active"
+              style={
+                Object {
+                  "left": "10%",
+                }
+              }
+            />
+            <span
+              className="rc-slider-dot rc-slider-dot-active"
+              style={
+                Object {
+                  "left": "20%",
+                }
+              }
+            />
+            <span
+              className="rc-slider-dot rc-slider-dot-active"
+              style={
+                Object {
+                  "left": "30%",
+                }
+              }
+            />
+            <span
+              className="rc-slider-dot"
+              style={
+                Object {
+                  "left": "40%",
+                }
+              }
+            />
+            <span
+              className="rc-slider-dot"
+              style={
+                Object {
+                  "left": "50%",
+                }
+              }
+            />
+            <span
+              className="rc-slider-dot"
+              style={
+                Object {
+                  "left": "60%",
+                }
+              }
+            />
+            <span
+              className="rc-slider-dot"
+              style={
+                Object {
+                  "left": "70%",
+                }
+              }
+            />
+            <span
+              className="rc-slider-dot"
+              style={
+                Object {
+                  "left": "80%",
+                }
+              }
+            />
+            <span
+              className="rc-slider-dot"
+              style={
+                Object {
+                  "left": "90%",
+                }
+              }
+            />
+            <span
+              className="rc-slider-dot"
+              style={
+                Object {
+                  "left": "100%",
+                }
+              }
+            />
+          </div>
+          <div
+            aria-disabled={false}
+            aria-valuemax={10}
+            aria-valuemin={0}
+            aria-valuenow={3}
+            className="rc-slider-handle"
+            role="slider"
+            style={
+              Object {
+                "left": "30%",
+              }
+            }
+            tabIndex={0}
+          />
+          <div
+            className="rc-slider-mark"
+          >
+            <span
+              className="rc-slider-mark-text rc-slider-mark-text-active"
+              style={
+                Object {
+                  "left": "0%",
+                  "marginLeft": "-4.5%",
+                  "width": "9%",
+                }
+              }
+            >
+              0
+            </span>
+            <span
+              className="rc-slider-mark-text rc-slider-mark-text-active"
+              style={
+                Object {
+                  "left": "10%",
+                  "marginLeft": "-4.5%",
+                  "width": "9%",
+                }
+              }
+            >
+              1
+            </span>
+            <span
+              className="rc-slider-mark-text rc-slider-mark-text-active"
+              style={
+                Object {
+                  "left": "20%",
+                  "marginLeft": "-4.5%",
+                  "width": "9%",
+                }
+              }
+            >
+              2
+            </span>
+            <span
+              className="rc-slider-mark-text rc-slider-mark-text-active"
+              style={
+                Object {
+                  "left": "30%",
+                  "marginLeft": "-4.5%",
+                  "width": "9%",
+                }
+              }
+            >
+              3
+            </span>
+            <span
+              className="rc-slider-mark-text"
+              style={
+                Object {
+                  "left": "40%",
+                  "marginLeft": "-4.5%",
+                  "width": "9%",
+                }
+              }
+            >
+              4
+            </span>
+            <span
+              className="rc-slider-mark-text"
+              style={
+                Object {
+                  "left": "50%",
+                  "marginLeft": "-4.5%",
+                  "width": "9%",
+                }
+              }
+            >
+              5
+            </span>
+            <span
+              className="rc-slider-mark-text"
+              style={
+                Object {
+                  "left": "60%",
+                  "marginLeft": "-4.5%",
+                  "width": "9%",
+                }
+              }
+            >
+              6
+            </span>
+            <span
+              className="rc-slider-mark-text"
+              style={
+                Object {
+                  "left": "70%",
+                  "marginLeft": "-4.5%",
+                  "width": "9%",
+                }
+              }
+            >
+              7
+            </span>
+            <span
+              className="rc-slider-mark-text"
+              style={
+                Object {
+                  "left": "80%",
+                  "marginLeft": "-4.5%",
+                  "width": "9%",
+                }
+              }
+            >
+              8
+            </span>
+            <span
+              className="rc-slider-mark-text"
+              style={
+                Object {
+                  "left": "90%",
+                  "marginLeft": "-4.5%",
+                  "width": "9%",
+                }
+              }
+            >
+              9
+            </span>
+            <span
+              className="rc-slider-mark-text"
+              style={
+                Object {
+                  "left": "100%",
+                  "marginLeft": "-4.5%",
+                  "width": "9%",
+                }
+              }
+            >
+              10
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="row"
+    />
+    <div
+      className="row"
+    />
+    <div
+      className="row"
+    >
+      <div
+        className="col"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Component tests  should render correctly GenreSelector cmp 1`] = `
+Array [
+  <div
+    className="col-6 col-sm-4 col-md-3 col-lg-2"
+>
+    <button
+        className="btn btn-primary"
+        onClick={[Function]}
+        style={
+            Object {
+                "margin": 5,
+                "width": "100%",
+              }
+        }
+        type={undefined}
+    >
+        Action
+    </button>
+</div>,
+  <div
+    className="col-6 col-sm-4 col-md-3 col-lg-2"
+>
+    <button
+        className="btn btn-primary"
+        onClick={[Function]}
+        style={
+            Object {
+                "margin": 5,
+                "width": "100%",
+              }
+        }
+        type={undefined}
+    >
+        Adventure
+    </button>
+</div>,
+  <div
+    className="col-6 col-sm-4 col-md-3 col-lg-2"
+>
+    <button
+        className="btn btn-primary"
+        onClick={[Function]}
+        style={
+            Object {
+                "margin": 5,
+                "width": "100%",
+              }
+        }
+        type={undefined}
+    >
+        Western
+    </button>
+</div>,
+]
+`;
+
+exports[`Component tests  should render correctly MovieListing cmp 1`] = `
+Array [
+  <div
+    className="col-12 col-sm-6 col-md-4 col-lg-3"
+>
+    <div
+        style={
+            Object {
+                "margin": 10,
+              }
+        }
+    >
+        <div
+            className="card"
+        >
+            <img
+                alt="Blaze"
+                className="card-img-top"
+                src="undefined/8Sxf0l5iAFau1sjOzZuk5VX1fcC.jpg"
+                width="100%"
+            />
+            <div
+                className="card-body"
+            >
+                <h5
+                    className="card-title"
+                >
+                    Blaze
+                </h5>
+                <h6
+                    className="card-subtitle"
+                >
+                    Action, Adventure, Western
+                </h6>
+                <br />
+                <button
+                    className="btn btn-secondary"
+                    onClick={[Function]}
+                    type={undefined}
+                >
+                    Watch
+                </button>
+            </div>
+        </div>
+    </div>
+</div>,
+  <div
+    className="col-12 col-sm-6 col-md-4 col-lg-3"
+>
+    <div
+        style={
+            Object {
+                "margin": 10,
+              }
+        }
+    >
+        <div
+            className="card"
+        >
+            <img
+                alt="Book Club"
+                className="card-img-top"
+                src="undefined/6ORGBbOA45pfKQXvntPf46NoFGO.jpg"
+                width="100%"
+            />
+            <div
+                className="card-body"
+            >
+                <h5
+                    className="card-title"
+                >
+                    Book Club
+                </h5>
+                <h6
+                    className="card-subtitle"
+                >
+                    Action
+                </h6>
+                <br />
+                <button
+                    className="btn btn-secondary"
+                    onClick={[Function]}
+                    type={undefined}
+                >
+                    Watch
+                </button>
+            </div>
+        </div>
+    </div>
+</div>,
+  <div
+    className="col-12 col-sm-6 col-md-4 col-lg-3"
+>
+    <div
+        style={
+            Object {
+                "margin": 10,
+              }
+        }
+    >
+        <div
+            className="card"
+        >
+            <img
+                alt="12 Strong"
+                className="card-img-top"
+                src="undefined/j18021qCeRi3yUBtqd2UFj1c0RQ.jpg"
+                width="100%"
+            />
+            <div
+                className="card-body"
+            >
+                <h5
+                    className="card-title"
+                >
+                    12 Strong
+                </h5>
+                <h6
+                    className="card-subtitle"
+                >
+                    Action, Adventure
+                </h6>
+                <br />
+                <button
+                    className="btn btn-secondary"
+                    onClick={[Function]}
+                    type={undefined}
+                >
+                    Watch
+                </button>
+            </div>
+        </div>
+    </div>
+</div>,
+]
+`;
