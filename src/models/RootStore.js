@@ -40,6 +40,19 @@ export const RootStore = types.model("Movies", {
     return self.moviesByGenre.sort((a, b) => b.voteAverage - a.voteAverage).filter((movie) => {
       return movie.voteAverage >= self.selectedRating;
     });
+  },
+
+  // Get actual genres. If only there is movie with such genre
+  get actualGenres() {
+
+    // Lets get all actual genre ids.
+    // Later it will be used for filtering genres
+    const genreIds = self.moviesFilteredByrating
+      .map(movie => movie.genreIds)
+      .reduce((col, curr) => [...new Set([...col, ...curr])], []);
+    return self.genres.slice().filter((genre) => {
+      return genreIds.includes(genre.id);
+    });
   }
 
 }))
@@ -80,8 +93,9 @@ export const RootStore = types.model("Movies", {
 
     // movies will be pushed into store
     setMovies(movies) {
-      movies.map((movie) => {
-        return self.movies.push(Movie.create({
+      movies.forEach((movie) => {
+        // push new movie into store
+        self.movies.push(Movie.create({
           id: movie.id,
           title: movie.title,
           posterPath: movie.poster_path,

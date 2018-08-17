@@ -55,7 +55,7 @@ export class App extends Component {
             <RatingSlider onChange={this.handleOnSliderChange} value={this.rootStore.selectedRating} />
           </Row>
           <Row>
-            <GenreSelector onChange={this.handleSelectGenre} genres={this.rootStore.genres} />
+            <GenreSelector onChange={this.handleSelectGenre} genres={this.rootStore.actualGenres} />
           </Row>
           <Row>
             <MovieListing movies={this.rootStore.moviesFilteredByrating} />
