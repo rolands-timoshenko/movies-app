@@ -21,7 +21,7 @@ export const Movie = types.model("Movie", {
     });
   },
 
-  // This one will give us string[]
+  // This one will give us genre names as string[]
   get genreNames() {
     return self.genres.map((genre) => {
       return genre.name

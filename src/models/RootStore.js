@@ -92,12 +92,14 @@ export const RootStore = types.model("Movies", {
       });
     },
 
+    // Will set rating
     setRating(val) {
       if (self.selectedRating !== val) {
         self.selectedRating = val;
       }
     },
 
+    // Saving genres inside store
     setGenres(genres) {
       genres.map((genre) => {
         return self.genres.push(Genre.create({
