@@ -8,8 +8,8 @@ import { Col } from 'reactstrap';
 export const RatingSlider = observer(({value, onChange}) => {
 
   const sliderWrapperStyle = {
-    margin: 20,
-    padding: 10,
+    marginBottom: 40,
+    padding: 20,
     textAlign: 'left'
   }
 
@@ -33,7 +33,6 @@ export const RatingSlider = observer(({value, onChange}) => {
 
   return (
     <Col style={sliderWrapperStyle}>
-      <h4>Select movie rating from 0 - 10</h4>
       <Slider 
         style={sliderStyle}
         onChange={onChange} 

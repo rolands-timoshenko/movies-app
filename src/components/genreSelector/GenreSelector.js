@@ -4,10 +4,16 @@ import PropTypes from 'prop-types';
 import { Col, Button } from 'reactstrap';
 
 const GenreSelector = observer(({genres, onChange}) => {
+  
+  const buttonStyle = {
+    marginBottom:20, 
+    width: '100%'
+  };
+
   return genres.map((genre) => {
     return (
       <Col lg="2" md="3" sm="4" xs="6" key={genre.id}>
-        <Button color={genre.isActive ? "primary": "secondary"} active={genre.isActive} style={{margin:5, width: '100%'}} onClick={onChange(genre.id)}>{genre.name}</Button>
+        <Button color={genre.isActive ? "primary": "secondary"} active={genre.isActive} style={buttonStyle} onClick={onChange(genre.id)}>{genre.name}</Button>
       </Col>
     );
   });

@@ -5,9 +5,11 @@ import { Card, CardImg, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
 
 const MovieCard = observer(({movie}) => {
+  
   const movieCardStyle = {
-    margin: 10
+    marginBottom: 20
   };
+
   return (
     <div style={movieCardStyle}>
       <Card>
