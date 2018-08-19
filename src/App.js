@@ -10,6 +10,8 @@ import { Button, Container, Row, Col } from 'reactstrap';
 export class App extends Component {
 
   rootStore;
+  // To add ability load more movies set to true
+  showLoadMore = false;
 
   constructor(props) {
     super(props);
@@ -24,7 +26,7 @@ export class App extends Component {
   }
 
   // Show Load More button if there are more pages with movies.
-  showLoadMore = () => {
+  loadMore = () => {
     return (this.rootStore.totalPages > this.rootStore.currentPage)
       ? <Button color="primary" onClick={this.rootStore.loadNext}>Load More</Button> : null;
   }
@@ -48,7 +50,7 @@ export class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to Movie listing app</h1>
+          <h1 className="App-title">Now playing movies</h1>
         </header>
         <Container>
           <Row>
@@ -60,11 +62,11 @@ export class App extends Component {
           <Row>
             <MovieListing movies={this.rootStore.moviesFilteredByrating} />
           </Row>
-          <Row>
+          { this.showLoadMore ? <Row>
             <Col>
-              {this.showLoadMore()}
+              {this.loadMore()}
             </Col>
-          </Row>
+          </Row> : null}
         </Container>
       </div>
     );

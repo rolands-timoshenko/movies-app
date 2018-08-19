@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import { Col } from 'reactstrap';
 
-export const RatingSlider = observer((props) => {
+export const RatingSlider = observer(({value, onChange}) => {
 
   const sliderWrapperStyle = {
     margin: 20,
@@ -36,12 +36,12 @@ export const RatingSlider = observer((props) => {
       <h4>Select movie rating from 0 - 10</h4>
       <Slider 
         style={sliderStyle}
-        onChange={props.onChange} 
+        onChange={onChange} 
         min={0} 
         max={10} 
         marks={sliderMarks} 
         step={0.5}
-        value={props.value} />
+        value={value} />
     </Col>
   );
 });

@@ -23,6 +23,8 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "react-test-renderer": "^16.4.2"
+    "mst-middlewares": "^3.1.1",
+    "react-test-renderer": "^16.4.2",
+    "remotedev": "^0.2.7"
   }
 }
