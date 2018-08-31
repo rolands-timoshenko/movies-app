@@ -15,10 +15,10 @@ const MovieCard = observer(({movie}) => {
       <Card>
         <CardImg top width="100%" src={movie.posterImage} alt={movie.title} />
         <CardBody>
-          <CardTitle>{movie.title}</CardTitle>
+          <CardTitle>{movie.title} ({movie.voteAverage})</CardTitle>
           <CardSubtitle>{movie.genreNames.join(", ")}</CardSubtitle>
           <br />
-          <Button>Watch</Button>
+          <Button>More</Button>
         </CardBody>
       </Card>
     </div>

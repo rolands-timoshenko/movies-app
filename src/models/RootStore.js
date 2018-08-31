@@ -3,6 +3,10 @@ import MoviesApi from '../api/MoviesApi';
 import { Movie } from './Movie';
 import { Genre } from './Genre';
 
+const ERROR = {
+  NOTHING_TO_LOAD: 0
+}
+
 // Main store model
 export const RootStore = types.model("Movies", {
   totalPages: types.maybe(types.number),
@@ -10,7 +14,9 @@ export const RootStore = types.model("Movies", {
   movies: types.array(Movie),
   genres: types.array(Genre),
   selectedGenres: types.array(types.number),
-  selectedRating: types.optional(types.number, 3)
+  selectedRating: types.optional(types.number, 3),
+  loadingMovies: types.optional(types.boolean, false),
+  nothingToLoad: types.optional(types.boolean, false)
 })
 
 // Computed values
@@ -62,15 +68,41 @@ export const RootStore = types.model("Movies", {
   // Set api instance
   const api = new MoviesApi();
 
+  function spreadData(data) {
+    self.setTotalPages(data.total_pages);
+    self.setMovies(data.results);
+    self.setCurrentPage(data.page);
+  }
+
   // Return public methods
   return {
 
     // This one will load movies from api and will spread properties to store
     async loadMovies(page = 1) {
-      const data = await api.getPlayingMovies(page);
-      self.setTotalPages(data.total_pages);
-      self.setMovies(data.results);
-      self.setCurrentPage(data.page);
+      if (self.nothingToLoad) {
+        return;
+      }
+      try {
+        self.setLoadingMovies(true);
+        const data = await api.getPlayingMovies(page);
+        if (data.results.length < 1 || data.total_results === self.movies.length) {
+          throw new Error(ERROR.NOTHING_TO_LOAD);
+        }
+        spreadData(data);
+        self.setLoadingMovies(false);
+      } catch (e) {
+        
+        switch (e.message) {
+          case ERROR.NOTHING_TO_LOAD:
+            self.setNothingToLoad(true);
+            break;
+
+          default:
+            throw e;
+        }
+      } finally {
+        self.setLoadingMovies(false);
+      }
     },
 
     // Will load genres from api and spread them into store
@@ -121,6 +153,14 @@ export const RootStore = types.model("Movies", {
           name: genre.name
         }));
       });
+    },
+
+    setNothingToLoad(bool) {
+      self.nothingToLoad = bool;
+    },
+
+    setLoadingMovies(bool) {
+      self.loadingMovies = bool;
     },
 
     // Will check if genre already exists in selectedGenres[] if so, item will be removed
