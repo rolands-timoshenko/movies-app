@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default class MoviesApi {
+export class MoviesApi {
   
   static apiUrl = "https://api.themoviedb.org/";
   static apiKey = "8b8ec78e1057439660f2e05f803987e2";
@@ -25,3 +25,7 @@ export default class MoviesApi {
     }
   }
 }
+
+const api = new MoviesApi();
+
+export default api;

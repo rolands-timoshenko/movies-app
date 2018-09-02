@@ -1,23 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import registerServiceWorker from './registerServiceWorker';
-import { RootStore } from './models/RootStore';
-import { Provider } from "mobx-react";
-import { asReduxStore, connectReduxDevtools } from "mst-middlewares";
+import React from 'react';
+import { Provider } from 'react-redux';
+import ReactDOM from 'react-dom';
+import { ReduxApp } from './App';
+import './index.css';
+import { configureStore } from "./store/Store";
 
-const rootStore = RootStore.create();
-
-// Lets add redux devtool so we can debug store
-asReduxStore(rootStore);
-connectReduxDevtools(require("remotedev"), rootStore);
+const store = configureStore();
 
 ReactDOM.render(
-    <Provider rootStore={rootStore}>
-      <App />
-    </Provider>
-  , document.getElementById('root'));
-// TODO: enable when needed 
-// registerServiceWorker(); 
+  <Provider store={store}>
+    <ReduxApp />
+  </Provider>
+, document.getElementById('root'));
